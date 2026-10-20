@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#171327" />
+    <meta name="description" content="工位情绪回收站：把今天的小烦恼交给加班幽灵，换一张工位存活凭证。" />
+    <title>工位情绪回收站 · 1024 鬼点子</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <script src="./app.js" defer></script>
+  </head>
+  <body>
+    <div class="site-shell">
+      <header class="topbar">
+        <a class="brand" href="#top" aria-label="工位情绪回收站，返回顶部">
+          <span class="brand-icon" aria-hidden="true">✳</span>
+          <span>AFTER HOURS<span class="brand-dot">.EXE</span></span>
+        </a>
+        <div class="topbar-right"><span class="online-dot"></span> 幽灵值班中 <span class="topbar-spark">✦</span> 1024 鬼点子</div>
+      </header>
+
+      <main id="top">
+        <section class="hero" aria-labelledby="page-title">
+          <div class="eyebrow"><span>✦</span> WORKPLACE EMOTION RECYCLING CENTER <span>✦</span></div>
+          <h1 id="page-title">工位情绪<span class="title-accent">回收站</span><span class="title-star" aria-hidden="true">✳</span></h1>
+          <p class="hero-copy">今天的烦恼，交给一只已经下班的幽灵处理。</p>
+          <p class="hero-subcopy">不用讲道理，先让它从屏幕上消失。</p>
+
+          <div class="game-frame" id="game-frame">
+            <div class="game-topline"><span><span class="topline-square"></span> DESK-404 / 情绪处理终端</span><span>LEVEL 01 <span class="blink-cursor">▮</span></span></div>
+            <div class="game-scene" id="game-scene" aria-label="加班幽灵坐在工位前">
+              <div class="scene-stars" aria-hidden="true"><i>✦</i><i>·</i><i>✳</i><i>+</i><i>·</i><i>✦</i></div>
+              <div class="moon" aria-hidden="true"></div>
+              <div class="window" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+              <div class="clock" aria-hidden="true">23:59</div>
+              <div class="shelf" aria-hidden="true"><span class="plant">♣</span><span class="shelf-book"></span><span class="shelf-book"></span><span class="shelf-book"></span></div>
+              <div class="ghost-wrap" id="ghost-wrap" aria-hidden="true">
+                <div class="ghost-halo"></div>
+                <div class="ghost">
+                  <div class="ghost-eye ghost-eye-left"></div><div class="ghost-eye ghost-eye-right"></div>
+                  <div class="ghost-blush ghost-blush-left"></div><div class="ghost-blush ghost-blush-right"></div>
+                  <div class="ghost-mouth"></div>
+                </div>
+                <div class="ghost-hand ghost-hand-left"></div><div class="ghost-hand ghost-hand-right"></div>
+              </div>
+              <div class="speech" id="ghost-speech" role="status">嗨，我是摸鱼幽灵。<br />今天有什么要扔的？</div>
+              <div class="desk" aria-hidden="true"><div class="monitor"><div class="monitor-screen"><span>_</span></div></div><div class="keyboard"></div><div class="mug">☕</div></div>
+              <div class="scene-floor" aria-hidden="true"></div>
+              <div class="effect-layer" id="effect-layer" aria-hidden="true"></div>
+            </div>
+            <div class="game-status"><span><span class="status-heart">♥</span> 情绪电量 <span id="energy-label">■■■□□</span></span><span id="status-label">等待投喂烦恼...</span></div>
+          </div>
+          <div class="frame-sticker" aria-hidden="true">GHOST<br />ON DUTY <span>↗</span></div>
+        </section>
+
+        <section class="workbench" aria-labelledby="workbench-title">
+          <div class="section-heading"><span class="step-tag">01 / 输入烦恼</span><h2 id="workbench-title">今天想把什么交给幽灵？</h2><p>大事小事都可以，写完就不用自己扛着了。</p></div>
+          <label class="sr-only" for="worry-input">写下今天的烦恼</label>
+          <div class="input-wrap"><textarea id="worry-input" maxlength="80" rows="3" placeholder="比如：刚开完会，又收到一封‘简单同步一下’..." aria-describedby="input-hint"></textarea><div class="input-footer"><span id="input-hint">仅在你的浏览器中处理，不会上传</span><span id="char-count">0 / 80</span></div></div>
+          <div class="quick-picks"><span>不知道写什么？试试</span><button type="button" data-pick="改了 8 版的 PPT">改了 8 版的 PPT</button><button type="button" data-pick="永远开不完的会">永远开不完的会</button><button type="button" data-pick="周一早上 9 点的闹钟">周一早上 9 点的闹钟</button></div>
+
+          <div class="section-heading mode-heading"><span class="step-tag">02 / 选择处理方式</span><h2>让烦恼以哪种方式离开？</h2></div>
+          <div class="mode-grid" role="group" aria-label="选择烦恼处理方式">
+            <button class="mode-card selected" type="button" data-mode="shred" aria-pressed="true"><span class="mode-icon" aria-hidden="true">✂</span><span class="mode-name">碎成像素</span><span class="mode-desc">像撤回一条不该发的消息</span><span class="mode-check" aria-hidden="true">✓</span></button>
+            <button class="mode-card" type="button" data-mode="launch" aria-pressed="false"><span class="mode-icon" aria-hidden="true">↗</span><span class="mode-name">发射到外太空</span><span class="mode-desc">地球暂时不接收此烦恼</span><span class="mode-check" aria-hidden="true">✓</span></button>
+            <button class="mode-card" type="button" data-mode="seal" aria-pressed="false"><span class="mode-icon" aria-hidden="true">▣</span><span class="mode-name">封进下班盒</span><span class="mode-desc">明天的事，明天再说</span><span class="mode-check" aria-hidden="true">✓</span></button>
+          </div>
+          <button class="process-button" id="process-button" type="button"><span>✦</span> 开始情绪回收 <span class="button-arrow">→</span></button>
+          <p class="form-message" id="form-message" role="status" aria-live="polite"></p>
+        </section>
+
+        <section class="result" id="result" aria-labelledby="result-title" hidden>
+          <div class="result-heading"><span class="step-tag">03 / 回收完成</span><h2 id="result-title">叮！你的烦恼已被妥善处理</h2><p>幽灵说：允许自己今天只做到这里。</p></div>
+          <div class="receipt" id="receipt">
+            <div class="receipt-top"><span>✳ AFTER HOURS .EXE</span><span>NO. <span id="receipt-number">000001</span></span></div>
+            <div class="receipt-stamp">已回收 <span>✓</span></div>
+            <div class="receipt-icon" aria-hidden="true">👻</div>
+            <div class="receipt-kicker">工 位 存 活 凭 证</div>
+            <div class="receipt-title">今天也有好好活过一天</div>
+            <div class="receipt-rule"></div>
+            <div class="receipt-row"><span>已处理烦恼</span><strong id="receipt-worry"></strong></div>
+            <div class="receipt-row"><span>处理方式</span><strong id="receipt-mode"></strong></div>
+            <div class="receipt-row"><span>幽灵批注</span><strong id="receipt-note"></strong></div>
+            <div class="receipt-rule"></div>
+            <p class="receipt-footer">本凭证证明：你已经努力了。<br />现在可以理直气壮地休息一下。</p>
+            <div class="receipt-bottom"><span id="receipt-date"></span><span>GHOST APPROVED ✳</span></div>
+          </div>
+          <div class="result-actions"><button id="download-button" type="button">↓ 保存凭证图片</button><button id="again-button" type="button">↺ 再回收一个</button></div>
+          <p class="result-tip" id="download-status" role="status" aria-live="polite">把凭证发给需要休息的同事吧。</p>
+        </section>
+      </main>
+      <footer><span>MADE FOR 1024 鬼点子计划</span><span>幽灵已下班，但它愿意帮你多待一会儿 ✳</span></footer>
+    </div>
+  </body>
+</html>
