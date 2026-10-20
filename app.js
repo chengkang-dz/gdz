@@ -11,9 +11,9 @@ const energyLabel = document.querySelector('#energy-label');
 const downloadStatus = document.querySelector('#download-status');
 
 const modes = {
-  shred: { name: '碎成像素', note: '已经碎了，拼不回来了。真遗憾呢。', speech: '啪！烦恼已碎成像素。' },
-  launch: { name: '发射到外太空', note: '已离开地球信号范围，请勿追踪。', speech: '咻——它现在归宇宙管。' },
-  seal: { name: '封进下班盒', note: '盒子上写着：今天禁止加班。', speech: '咔哒！明天再打开吧。' },
+  shred: { name: '碎成像素', note: '已经碎了，拼不回来了。真遗憾呢。', speech: '啪！烦恼已碎成像素。', working: '准备像素粉碎机...' },
+  launch: { name: '发射到外太空', note: '已离开地球信号范围，请勿追踪。', speech: '咻——它现在归宇宙管。', working: '正在校准发射轨道...' },
+  seal: { name: '封进下班盒', note: '盒子上写着：今天禁止加班。', speech: '咔哒！明天再打开吧。', working: '下班盒正在打开...' },
 };
 
 let selectedMode = 'shred';
@@ -45,18 +45,46 @@ document.querySelectorAll('[data-mode]').forEach((button) => {
   });
 });
 
-function sprinkle() {
-  const marks = ['✦', '✳', '·', '+', '✦', '·', '✳', '+'];
-  marks.forEach((mark, index) => {
-    const particle = document.createElement('span');
-    particle.className = 'effect-particle';
-    particle.textContent = mark;
-    particle.style.left = `${43 + Math.random() * 15}%`;
-    particle.style.top = `${35 + Math.random() * 25}%`;
-    particle.style.setProperty('--x', `${(index % 2 ? 1 : -1) * (35 + Math.random() * 110)}px`);
-    particle.style.setProperty('--y', `${(index < 4 ? -1 : 1) * (20 + Math.random() * 90)}px`);
-    effectLayer.append(particle);
-  });
+function playEffect(mode, worry) {
+  effectLayer.className = `effect-layer effect-${mode}`;
+  effectLayer.replaceChildren();
+
+  const label = document.createElement('div');
+  label.className = 'effect-label';
+  label.textContent = modes[mode].name;
+  effectLayer.append(label);
+
+  const chip = document.createElement('div');
+  chip.className = 'effect-token';
+  chip.textContent = worry;
+
+  if (mode === 'shred') {
+    effectLayer.append(chip);
+    for (let index = 0; index < 20; index += 1) {
+      const pixel = document.createElement('span');
+      pixel.className = 'effect-pixel';
+      pixel.style.setProperty('--x', `${(index % 2 ? 1 : -1) * (25 + Math.random() * 145)}px`);
+      pixel.style.setProperty('--y', `${(index < 10 ? -1 : 1) * (20 + Math.random() * 105)}px`);
+      pixel.style.setProperty('--delay', `${Math.random() * 0.25}s`);
+      effectLayer.append(pixel);
+    }
+  } else if (mode === 'launch') {
+    const flight = document.createElement('div');
+    flight.className = 'effect-flight';
+    const rocket = document.createElement('div');
+    rocket.className = 'effect-rocket';
+    rocket.textContent = '🚀';
+    flight.append(chip, rocket);
+    effectLayer.append(flight);
+  } else {
+    const box = document.createElement('div');
+    box.className = 'effect-box';
+    box.innerHTML = '<div class="effect-box-lid"></div><div class="effect-box-front">下 班 盒</div>';
+    const stamp = document.createElement('div');
+    stamp.className = 'effect-seal-stamp';
+    stamp.textContent = '已封存 ✓';
+    effectLayer.append(chip, box, stamp);
+  }
 }
 
 function formatDate(date) {
@@ -89,24 +117,23 @@ processButton.addEventListener('click', () => {
 
   result.hidden = true;
   const mode = selectedMode;
+  const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const scrollDelay = reducedMotion ? 0 : 500;
   processButton.disabled = true;
+  document.querySelectorAll('[data-mode]').forEach((card) => { card.disabled = true; });
   processButton.innerHTML = '<span>✦</span> 幽灵处理中... <span class="button-arrow">→</span>';
-  statusLabel.textContent = '正在回收烦恼...';
+  statusLabel.textContent = modes[mode].working;
   speech.innerHTML = '收到！<br>交给我吧。';
+  document.querySelector('#game-frame').scrollIntoView({ behavior: reducedMotion ? 'instant' : 'smooth', block: 'center' });
   effectLayer.replaceChildren();
-  const chip = document.createElement('div');
-  chip.className = 'effect-chip';
-  chip.textContent = worry;
-  effectLayer.append(chip);
-
   window.setTimeout(() => {
-    chip.classList.add(mode);
-    sprinkle();
+    playEffect(mode, worry);
     scene.classList.add('celebrating');
-  }, 250);
+  }, scrollDelay);
 
   window.setTimeout(() => {
     effectLayer.replaceChildren();
+    effectLayer.className = 'effect-layer';
     scene.classList.remove('celebrating');
     speech.textContent = modes[mode].speech;
     statusLabel.textContent = '回收成功！今日可以休息了';
@@ -114,8 +141,9 @@ processButton.addEventListener('click', () => {
     lastReceipt = makeReceipt(worry, mode);
     renderReceipt(lastReceipt);
     processButton.disabled = false;
+    document.querySelectorAll('[data-mode]').forEach((card) => { card.disabled = false; });
     processButton.innerHTML = '<span>✦</span> 开始情绪回收 <span class="button-arrow">→</span>';
-  }, 1750);
+  }, scrollDelay + (reducedMotion ? 350 : 2200));
 });
 
 document.querySelector('#again-button').addEventListener('click', () => {
