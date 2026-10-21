@@ -14,7 +14,7 @@
 python -m http.server 4173
 ```
 
-然后访问 `http://localhost:4173/`。作品使用原生 HTML、CSS、JavaScript，无需安装依赖。Google Fonts 加载失败时会自动使用系统字体。
+然后访问 `http://localhost:4173/`。作品使用原生 HTML、CSS、JavaScript 和系统字体，无需安装依赖。
 
 ## 参赛材料
 
