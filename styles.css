@@ -38,3 +38,9 @@ body{min-width:0}
 @keyframes lid-close{0%,61%{transform:translate(-6px,-20px) rotate(-12deg)}78%,100%{transform:translate(0,0) rotate(0)}}
 @keyframes stamp-pop{0%,78%{opacity:0;transform:rotate(-13deg) scale(0)}88%,100%{opacity:1;transform:rotate(-13deg) scale(1)}}
 @media(max-width:600px){.effect-label{font-size:11px}.effect-token{font-size:11px;padding:8px 10px}.effect-pixel{width:9px;height:9px}.effect-rocket{font-size:34px}.effect-box{top:60%;width:130px;height:63px}.effect-box-lid{width:140px}.effect-box-front{font-size:11px}.effect-seal-stamp{font-size:10px;top:67%}}
+.monitor-screen{background:#121827;padding:5px}
+.monitor-screen img{display:block;width:100%;height:100%;object-fit:contain}
+.game-status>span:last-child{max-width:57%;text-align:right;line-height:1.2}
+.frame-sticker{bottom:18px}
+@media(max-width:800px){.frame-sticker{bottom:18px}}
+@media(max-width:600px){.clock{top:2px}.frame-sticker{bottom:13px}.game-status>span:last-child{max-width:56%}}

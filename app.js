@@ -9,6 +9,16 @@ const effectLayer = document.querySelector('#effect-layer');
 const statusLabel = document.querySelector('#status-label');
 const energyLabel = document.querySelector('#energy-label');
 const downloadStatus = document.querySelector('#download-status');
+const deskClock = document.querySelector('#desk-clock');
+
+function updateDeskClock() {
+  const now = new Date();
+  deskClock.textContent = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+}
+
+updateDeskClock();
+window.setInterval(updateDeskClock, 1000);
+document.addEventListener('visibilitychange', updateDeskClock);
 
 const modes = {
   shred: { name: '碎成像素', note: '已经碎了，拼不回来了。真遗憾呢。', speech: '啪！烦恼已碎成像素。', working: '准备像素粉碎机...' },

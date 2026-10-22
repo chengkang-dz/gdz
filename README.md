@@ -34,4 +34,4 @@ python -m http.server 4173
 
 ## Cloudflare 备用发布
 
-Cloudflare Workers 连接 GitHub 的 `main` 分支，部署命令为 `npx wrangler deploy`。`.assetsignore` 仅允许上传 `index.html`、`styles.css`、`app.js` 三个运行文件。
+Cloudflare Workers 连接 GitHub 的 `main` 分支，部署命令为 `npx wrangler deploy`。`.assetsignore` 仅允许上传 `index.html`、`styles.css`、`app.js` 和 `logo.png` 四个运行文件。
